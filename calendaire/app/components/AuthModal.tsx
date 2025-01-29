@@ -9,10 +9,10 @@ export function AuthModal(){
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button>
-						Try for free</Button>  
+						Login Now </Button>  
 				</DialogTrigger>
 				
-				<DialogContent className="sm:max-w-[550px]">
+				<DialogContent className="sm:max-w-[580px]">
                  <DialogHeader className="flex flex-row justify-center items center gap-2">
 					<Image src={calendaireLogo} alt="Calendaire Logo" width={155} height={185}/>
 
