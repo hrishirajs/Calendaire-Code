@@ -8,7 +8,7 @@ export function AuthModal(){
 	return(
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button>
+					<Button className="mr-4">
 						Login Now </Button>  
 				</DialogTrigger>
 				
