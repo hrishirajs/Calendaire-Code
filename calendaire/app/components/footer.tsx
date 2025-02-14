@@ -31,7 +31,7 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black hover:text-green-600 transition-colors duration-300"
+                  className="text-black hover:text-blue-600 transition-colors duration-300"
                 >
                   {link.label}
                 </a>
@@ -58,7 +58,7 @@ export default function Footer() {
               name="name"
               placeholder="Your Name"
               required
-              className="w-full px-4 py-2 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600"
+              className="w-full px-4 py-2 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
             {/* Email Input */}
             <input
@@ -74,12 +74,12 @@ export default function Footer() {
               placeholder="Your Message"
               rows={4}
               required
-              className="w-full px-4 py-2 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600"
+              className="w-full px-4 py-2 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
             ></textarea>
             {/* Submit Button */}
             <button
               type="submit"
-              className="bg-green-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-greem-700 transition-colors duration-300"
+              className="bg-black px-4 py-2 rounded-lg text-white font-medium hover:bg-greem-700 transition-colors duration-300"
             >
               Send Message
             </button>

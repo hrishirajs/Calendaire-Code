@@ -1,6 +1,6 @@
 export default function HeroSection() {
 	return (
-	  <div className="relative bg-gradient-to-r from-emerald-500 to-teal-600 text-white h-screen flex items-center justify-center">
+	 <div className="relative bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white h-screen flex items-center justify-center">
 		<div className="text-center max-w-3xl px-6">
 		  <h1 className="text-5xl font-extrabold mb-4 text-gold">
 			Schedule Meetings Hassle Free
@@ -11,13 +11,13 @@ export default function HeroSection() {
 		  <div className="flex justify-center space-x-4">
 			<a
 			  href="/"
-			  className="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-teal-600 transition duration-300"
+			  className="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300"
 			>
 			  Get Started
 			</a>
 			<a
 			  href="/"
-			  className="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-teal-600 transition duration-300"
+			  className="bg-transparent border border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:text-blue-600 transition duration-300"
 			>
 			  Learn More
 			</a>

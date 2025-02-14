@@ -1,8 +1,8 @@
 export default function TestimonialsSection() {
 	return (
-	  <section className="py-16 bg-teal-50">
+	  <section className="py-16 bg-blue-50">
 		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		  <h2 className="text-center text-3xl font-extrabold mb-8 text-teal-600">What Our Clients Say</h2>
+		  <h2 className="text-center text-3xl font-extrabold mb-8 text-black">What Our Clients Say</h2>
 		  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{[
 			  {
