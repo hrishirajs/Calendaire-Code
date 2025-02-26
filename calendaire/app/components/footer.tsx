@@ -5,7 +5,7 @@ import CalendaireLogo from "@/public/Calendaire Logo.png";
 
 export default function Footer() {
   return (
-    <div className="bg-muted/100 text-primary py-10">
+    <div className=" relative bg-gradient-to-r from-gray-900 via-black to-gray-800 bg-muted/100 text-white py-10">
       {/* Top Section */}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Branding */}
@@ -18,7 +18,7 @@ export default function Footer() {
 
         {/* Quick Links Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+          <h3 className="text-white font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             {[
               { href: "https://www.x.com/hrishi_rajs", label: "X (Twitter)" },
@@ -31,7 +31,7 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black hover:text-blue-600 transition-colors duration-300"
+                  className="text-white hover:text-blue-600 transition-colors duration-300"
                 >
                   {link.label}
                 </a>
@@ -43,7 +43,7 @@ export default function Footer() {
         {/* Contact Form */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-          <p className="text-black leading-relaxed">
+          <p className="text-white leading-relaxed">
             Have questions or feedback? Send us a message directly!
           </p>
           <form

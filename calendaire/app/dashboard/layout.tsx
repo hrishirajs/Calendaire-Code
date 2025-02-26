@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ReactNode } from "react";
-import calendaireLogo from "@/public/Calendaire Logo.png"
+import calendaireLogo from "@/public/Calendaire Logo Inside.png"
 import Link from "next/link";
 import { DashBoardLinks } from "../components/DashBoardLinks";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
@@ -37,11 +37,11 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 	return(
 		<> 
 		 <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-			<div className="hidden border-r bg-muted/40 md:block">
+			<div className="hidden border-r bg-muted/15 md:block">
 			<div className="flex h-full max-h-screen flex-col">
 				<div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6">
 					<Link href="/" className="pl-2">
-						<Image src={calendaireLogo} alt="Calendaire Logo" width={155} height={185}/>
+						<Image src={calendaireLogo} alt="Calendaire Logo" className="mt-12 mb-5" width={155} height={185}/>
 					</Link>
 					</div>
 				 		<nav className="grid items-start px-2 lg:px-4">
@@ -52,7 +52,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 			
 			<div className="flex flex-col">
 
-				<header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px lg:px-6" >
+				<header className="flex h-14 items-center gap-4 border-b bg-muted/15 px-4 lg:h-[60px lg:px-6" >
 					<Sheet>
 						<SheetTrigger>
 							<Button className=" shrink-0 md:hidden " size="icon" variant="outline">
