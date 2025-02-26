@@ -36,7 +36,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 	const data=await getData(session.user?.id as string);
 	return(
 		<> 
-		 <div className="min-h-screen w-full grid grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+		 <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
 			<div className="hidden border-r bg-muted/40 md:block">
 			<div className="flex h-full max-h-screen flex-col">
 				<div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6">
@@ -52,10 +52,10 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 			
 			<div className="flex flex-col">
 
-				<header className="flex h-14 items-center gap-4 border-b bg-muted/100 px-4 lg:h-[60px lg:px-6" >
+				<header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px lg:px-6" >
 					<Sheet>
 						<SheetTrigger>
-							<Button className="md:hidden shrink-0" size="icon" variant="outline">
+							<Button className=" shrink-0 md:hidden " size="icon" variant="outline">
 								<Menu className="size-5"></Menu>
 							</Button>
 						
