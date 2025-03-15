@@ -50,9 +50,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 			    	</div>
 		    	</div>
 			
-			<div className="flex flex-col">
+			<div className="flex flex-col overflow-x-hidden">
 
-				<header className="flex h-14 items-center gap-4 border-b bg-muted/15 px-4 lg:h-[60px lg:px-6" >
+				<header className="flex h-14 items-center gap-4 border-b bg-muted/15 px-4 lg:h-[60px] lg:px-6">
 					<Sheet>
 						<SheetTrigger>
 							<Button className=" shrink-0 md:hidden " size="icon" variant="outline">
