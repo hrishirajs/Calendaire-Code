@@ -41,7 +41,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 			<div className="flex h-full max-h-screen flex-col">
 				<div className="flex h-14 items-center px-4 lg:h-[60px] lg:px-6">
 					<Link href="/" className="pl-2">
-						<Image src={calendaireLogo} alt="Calendaire Logo" className="mt-12 mb-5" width={155} height={185}/>
+						<Image src={calendaireLogo} alt="Calendaire Logo" className="pt-3 mt-12 mb-5 dark:brightness-0 dark:invert" width={155} height={185}/>
 					</Link>
 					</div>
 				 		<nav className="grid items-start px-2 lg:px-4">
