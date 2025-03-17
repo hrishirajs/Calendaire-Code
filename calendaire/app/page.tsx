@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 import { auth } from "./lib/auth";
@@ -16,7 +15,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="bg-emerald-50 text-gray-900">
+    <div className="min-h-screen">
       {/* Navbar */}
       <Navbar />
       {/* Hero Section */}

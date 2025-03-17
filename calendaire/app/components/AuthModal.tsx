@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
-import calendaireLogo from"@/public/Calendaire Logo.png"
+import calendaireLogo from "../../public/Calendaire Logo Inside.png"
 import { signIn } from "../lib/auth";
 import { GithubAuthButton, GoogleAuthButton, SlackAuthButton } from "./SubmitButtons";
 export function AuthModal(){
