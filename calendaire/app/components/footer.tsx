@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <div className=" relative bg-gradient-to-r from-gray-900 via-black to-gray-800 bg-muted/100 text-white py-10">
       {/* Top Section */}
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-8 md:px-16 lg:px-24 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Branding */}
         <div>
           <Image src={CalendaireLogo} alt="Calendaire Logo" width={150} height={50} />
@@ -88,7 +88,7 @@ export default function Footer() {
       </div>
 
       {/* Middle Section */}
-      <div className="container mx-auto mt-10 flex justify-center space-x-6">
+      <div className="container mx-auto px-8 md:px-16 lg:px-24 mt-10 flex justify-center space-x-6">
         {[{ Icon: Facebook, label: "Facebook" }, { Icon: Twitter, label: "Twitter" }, { Icon: Instagram, label: "Instagram" }, { Icon: Linkedin, label: "LinkedIn" }].map(({ Icon, label }) => (
           <a
             key={label}
@@ -102,7 +102,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Section */}
-      <div className="container mx-auto mt-10 border-t border-gray-700 pt-6 text-center text-sm">
+      <div className="container mx-auto px-8 md:px-16 lg:px-24 mt-10 border-t border-gray-700 pt-6 text-center text-sm">
         {/* Legal Information */}
         <p className="mb-2">
           {[

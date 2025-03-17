@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function HeroSection() {
   return (
-    <div className="relative bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex flex-col lg:flex-row items-center justify-between gap-12">
+    <div className="relative bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white min-h-[calc(100vh-5rem)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left side - Text content */}
         <div className="flex-1 text-center lg:text-left max-w-2xl">
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">

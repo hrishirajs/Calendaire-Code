@@ -1,4 +1,3 @@
-
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -34,9 +33,9 @@ export function GoogleAuthButton(){
 	return(
 		<>
 		{
-		pending?(<Button disabled variant={"outline"} className="w-full"><Loader2 className="size-4 mr-2 animate-spin"/>Please wait...</Button>):
+		pending?(<Button disabled variant={"outline"} className="w-full h-9"><Loader2 className="size-4 mr-2 animate-spin"/>Please wait...</Button>):
 
-		(<Button variant={"outline"} className="w-full"> <Image src={GoogleLogo} alt="Google Logo" className="size-4 mr-2"/> Sign in with Google</Button>)}
+		(<Button variant={"outline"} className="w-full h-9"> <Image src={GoogleLogo} alt="Google Logo" className="size-4 mr-2"/> Sign in with Google</Button>)}
 			</>
 	);
 }
@@ -46,9 +45,9 @@ export function GithubAuthButton(){
 	return(
 		<>
 		{
-		pending?(<Button disabled variant={"outline"} className="w-full"><Loader2 className="size-4 mr-2 animate-spin"/>Please wait...</Button>):
+		pending?(<Button disabled variant={"outline"} className="w-full h-9"><Loader2 className="size-4 mr-2 animate-spin"/>Please wait...</Button>):
 
-		(<Button variant={"outline"} className="w-full"> <Image src={GithubLogo} alt="Github Logo" className="size-4 mr-2"/> Sign in with Github</Button>)}
+		(<Button variant={"outline"} className="w-full h-9"> <Image src={GithubLogo} alt="Github Logo" className="size-4 mr-2"/> Sign in with Github</Button>)}
 			</>
 	);
 }
@@ -59,9 +58,9 @@ export function SlackAuthButton(){
 	return(
 		<>
 		{
-		pending?(<Button disabled variant={"outline"} className="w-full"><Loader2 className="size-4 mr-2 animate-spin"/>Please wait...</Button>):
+		pending?(<Button disabled variant={"outline"} className="w-full h-9"><Loader2 className="size-4 mr-2 animate-spin"/>Please wait...</Button>):
 
-		(<Button variant={"outline"} className="w-full"> <Image src={SlackLogo} alt="Slack Logo" className="size-4 mr-2"/> Sign in with Slack</Button>)}
+		(<Button variant={"outline"} className="w-full h-9"> <Image src={SlackLogo} alt="Slack Logo" className="size-4 mr-2"/> Sign in with Slack</Button>)}
 			</>
 	);
 }

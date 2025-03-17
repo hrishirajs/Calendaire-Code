@@ -18,17 +18,19 @@ export default async function Home() {
     <div className="min-h-screen">
       {/* Navbar */}
       <Navbar />
-      {/* Hero Section */}
-      <HeroSection />
+      <div className="pt-20">
+        {/* Hero Section */}
+        <HeroSection />
 
-      {/* Features Section */}
-      <FeaturesSection />
+        {/* Features Section */}
+        <FeaturesSection />
 
-      {/* Testimonials Section */}
-      <TestimonialsSection />
+        {/* Testimonials Section */}
+        <TestimonialsSection />
 
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
+      </div>
     </div>
   );
 }

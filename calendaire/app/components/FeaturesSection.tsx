@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="relative bg-gradient-to-r from-gray-900 via-black to-gray-800 py-24">
+    <section id="features" className="relative bg-gradient-to-r from-gray-900 via-black to-gray-800 py-24 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-extrabold text-white mb-4">With us, scheduling is easy</h2>

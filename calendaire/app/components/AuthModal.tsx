@@ -12,7 +12,7 @@ export function AuthModal(){
 						Login Now </Button>  
 				</DialogTrigger>
 				
-				<DialogContent className="sm:max-w-[580px]">
+				<DialogContent className="sm:max-w-[620px]">
                  <DialogHeader className="flex flex-row justify-center items center gap-2">
 					<Image src={calendaireLogo} alt="Calendaire Logo" width={155} height={185}/>
 
