@@ -7,6 +7,9 @@ export default function HeroSection() {
         {/* Left side - Text content */}
         <div className="flex-1 text-center lg:text-left max-w-2xl">
           <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+            Calendaire
+          </h1>
+          <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
             The better way to schedule your meetings
           </h1>
           <p className="text-lg lg:text-xl mb-8 text-gray-300">

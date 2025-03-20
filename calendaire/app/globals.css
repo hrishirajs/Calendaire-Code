@@ -6,6 +6,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+  will-change: transform;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

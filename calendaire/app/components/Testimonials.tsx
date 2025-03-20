@@ -50,24 +50,48 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
-        {/* Trusted By Section */}
+        {/* Technology Stack Section */}
         <div className="mt-24 text-center">
-          <h3 className="text-2xl font-bold text-white mb-12">Trusted by fast-growing companies</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { name: "Company 1", logo: "/logos/company1.svg" },
-              { name: "Company 2", logo: "/logos/company2.svg" },
-              { name: "Company 3", logo: "/logos/company3.svg" },
-              { name: "Company 4", logo: "/logos/company4.svg" },
-            ].map((company, index) => (
-              <div key={index} className="flex items-center justify-center">
-                <img 
-                  src={company.logo} 
-                  alt={company.name} 
-                  className="h-8 opacity-50 hover:opacity-100 transition-opacity duration-300"
-                />
+          <h3 className="text-2xl font-bold text-white mb-12">Built using trusted technology</h3>
+          <div className="relative w-full overflow-hidden">
+            <div className="flex animate-scroll">
+              <div className="flex items-center justify-center gap-24 px-16">
+                {[
+                  { name: "Next.js", logo: "/nextjs logo.jpg" },
+                  { name: "Tailwind CSS", logo: "/tailwind logo.png" },
+                  { name: "TypeScript", logo: "/typescript logo.png" },
+                  { name: "shadcn/ui", logo: "/shadcn logo.png" },
+                  { name: "Supabase", logo: "/supabase logo.jpg" },
+                  { name: "Nylas", logo: "/nylas logo.png" },
+                ].map((tech, index) => (
+                  <div key={index} className="flex-shrink-0 w-32">
+                    <img 
+                      src={tech.logo} 
+                      alt={tech.name} 
+                      className="h-20 w-full object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="flex items-center justify-center gap-24 px-16">
+                {[
+                  { name: "Next.js", logo: "/nextjs logo.jpg" },
+                  { name: "Tailwind CSS", logo: "/tailwind logo.png" },
+                  { name: "TypeScript", logo: "/typescript logo.png" },
+                  { name: "shadcn/ui", logo: "/shadcn logo.png" },
+                  { name: "Supabase", logo: "/supabase logo.jpg" },
+                  { name: "Nylas", logo: "/nylas logo.png" },
+                ].map((tech, index) => (
+                  <div key={`duplicate-${index}`} className="flex-shrink-0 w-32">
+                    <img 
+                      src={tech.logo} 
+                      alt={tech.name} 
+                      className="h-20 w-full object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

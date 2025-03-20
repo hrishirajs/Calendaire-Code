@@ -8,7 +8,7 @@ export function Navbar() {
 		<div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-gray-900 via-black to-gray-800 h-20 flex items-center justify-between px-6 md:px-12 shadow-md">
 			<div className="flex items-center gap-2">
 				<Link href="/" className="flex items-center gap-2">
-					<Image src={calendaireLogo} alt="Calendaire Logo" width={120} height={120} className="h-12 w-auto"/>
+					<Image src={calendaireLogo} alt="Calendaire Logo" className="h-20 w-auto"/>
 				</Link>
 			</div>
 			
