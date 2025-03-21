@@ -68,6 +68,30 @@ model Availability {
   day      Day
   fromTime String // e.g., '08:00'
   tillTime String // e.g., '18:00'
+  hour0to1   Boolean @default(false)
+  hour1to2   Boolean @default(false)
+  hour2to3   Boolean @default(false)
+  hour3to4   Boolean @default(false)
+  hour4to5   Boolean @default(false)
+  hour5to6   Boolean @default(false)
+  hour6to7   Boolean @default(false)
+  hour7to8   Boolean @default(false)
+  hour8to9   Boolean @default(false)
+  hour9to10  Boolean @default(false)
+  hour10to11 Boolean @default(false)
+  hour11to12 Boolean @default(false)
+  hour12to13 Boolean @default(false)
+  hour13to14 Boolean @default(false)
+  hour14to15 Boolean @default(false)
+  hour15to16 Boolean @default(false)
+  hour16to17 Boolean @default(false)
+  hour17to18 Boolean @default(false)
+  hour18to19 Boolean @default(false)
+  hour19to20 Boolean @default(false)
+  hour20to21 Boolean @default(false)
+  hour21to22 Boolean @default(false)
+  hour22to23 Boolean @default(false)
+  hour23to24 Boolean @default(false)
   isActive Boolean @default(true) // Toggle availability for the day
 
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
