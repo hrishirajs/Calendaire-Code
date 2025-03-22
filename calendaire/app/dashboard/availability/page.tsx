@@ -44,6 +44,9 @@ export default async function Availability(){
 					<TabsContent value="general">
 						<form action={updateAvailabilityAction}>
 							<CardContent className="flex flex-col gap-y-4 px-4">
+								<p className="text-sm text-muted-foreground mb-2">
+									Set your general availability for each day. Your hourly availability settings will be preserved within this time range.
+								</p>
 								{data.map((item)=>(
 									<div key={item.id} 
 									className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-3">
@@ -93,24 +96,45 @@ export default async function Availability(){
 					<TabsContent value="hourly">
 						<form action={updateHourlyAvailabilityAction}>
 							<CardContent className="px-4">
+								<p className="text-sm text-muted-foreground mb-4">
+									Customize your hourly availability within your general availability time range. Hours outside your general time range will be automatically unavailable.
+								</p>
 								{data.map((item) => (
 									<div key={item.id} className="mb-6">
 										<div className="flex items-center gap-x-3 mb-3">
 											<input type="hidden" name={`id-${item.id}`} value={item.id}/>
-											<Switch name={`isActive-${item.id}`} defaultChecked={item.isActive}/>
 											<p className="font-medium">{item.day}</p>
+											<span className="text-muted-foreground">
+												({item.fromTime} - {item.tillTime})
+											</span>
+											{!item.isActive && (
+												<span className="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-md">
+													Day inactive
+												</span>
+											)}
 										</div>
 										
 										<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
 											{Array.from({ length: 24 }, (_, hour) => {
 												const hourFieldName = `hour${hour}to${hour + 1}`;
 												const hourValue = item[hourFieldName as keyof typeof item] as boolean;
+												const hourString = `${hour.toString().padStart(2, '0')}:00`;
+												const isWithinTimeRange = 
+													hourString >= item.fromTime && 
+													hourString < item.tillTime;
+												
 												return (
-													<div key={`${item.id}-${hour}`} className="flex items-center gap-x-2 border rounded-md p-2">
+													<div 
+														key={`${item.id}-${hour}`} 
+														className={`flex items-center gap-x-2 border rounded-md p-2 ${
+															!isWithinTimeRange ? 'bg-gray-100 opacity-60' : 
+															!item.isActive ? 'bg-gray-50 opacity-60' : ''
+														}`}
+													>
 														<Switch 
 															name={`${hourFieldName}-${item.id}`} 
 															defaultChecked={hourValue}
-															disabled={!item.isActive}
+															disabled={!item.isActive || !isWithinTimeRange}
 														/>
 														<span className="text-sm whitespace-nowrap">
 															{hour.toString().padStart(2, '0')}:00 - {(hour + 1).toString().padStart(2, '0')}:00
