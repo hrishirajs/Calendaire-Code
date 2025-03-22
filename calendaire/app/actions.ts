@@ -251,4 +251,62 @@ export async function updateAvailabilityAction(formData:FormData) {
 	  console.error("Error updating availability:", error);
 	}
 }
+
+export async function updateHourlyAvailabilityAction(formData:FormData) {
+  const session = await requireUser();
+  
+  const rawData = Object.fromEntries(formData.entries());
+  const availabilityData = Object.keys(rawData)
+    .filter((key) => key.startsWith("id-"))
+    .map((key) => {
+      const id = key.replace("id-", "");
+      
+      // Get the isActive status for the day
+      const isActive = rawData[`isActive-${id}`] === "on";
+      
+      // Create data object with basic isActive field
+      const data: any = {
+        isActive: isActive,
+      };
+      
+      // Add hourly availability data (hour0to1, hour1to2, etc.)
+      // Only process hourly data if the day is active
+      if (isActive) {
+        for (let hour = 0; hour < 24; hour++) {
+          const hourFieldName = `hour${hour}to${hour + 1}`;
+          const formKey = `${hourFieldName}-${id}`;
+          
+          // Check if the hour is set to be active
+          data[hourFieldName] = rawData[formKey] === "on";
+        }
+      } else {
+        // If day is not active, all hours are set to false
+        for (let hour = 0; hour < 24; hour++) {
+          const hourFieldName = `hour${hour}to${hour + 1}`;
+          data[hourFieldName] = false;
+        }
+      }
+      
+      return {
+        id,
+        data
+      };
+    });
+  
+  try {
+    // Process each availability item one by one
+    for (const item of availabilityData) {
+      await prisma.availability.update({
+        where: { id: item.id },
+        data: item.data
+      });
+      
+      console.log(`Updated hourly availability for ID ${item.id}`);
+    }
+    
+    revalidatePath("/dashboard/availability");
+  } catch (error) {
+    console.error("Error updating hourly availability:", error);
+  }
+}
   
