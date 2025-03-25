@@ -18,7 +18,14 @@ async function getData(userId:string) {
 	if(!data){
 		return notFound();
 	}
-	return data;
+	
+	// Define the order of days
+	const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	
+	// Sort the data array based on the day order
+	return data.sort((a, b) => {
+		return dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day);
+	});
 }
 
 export default async function Availability(){
