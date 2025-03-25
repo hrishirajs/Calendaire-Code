@@ -126,9 +126,9 @@ export default async function Availability(){
 												return (
 													<div 
 														key={`${item.id}-${hour}`} 
-														className={`flex items-center gap-x-2 border rounded-md p-2 ${
-															!isWithinTimeRange ? 'bg-gray-100 opacity-60' : 
-															!item.isActive ? 'bg-gray-50 opacity-60' : ''
+														className={`flex items-center gap-x-1 border rounded-md p-1.5 ${
+															!isWithinTimeRange ? 'bg-gray-100 dark:bg-gray-800 text-muted-foreground' : 
+															!item.isActive ? 'bg-gray-50 dark:bg-gray-900 text-muted-foreground' : ''
 														}`}
 													>
 														<Switch 
