@@ -6,7 +6,9 @@ export default  async function DashboardPage() {
 const session=await requireUser();
 	return (
 		<div>
-			<h1> HELLO FROM DASHBOARD</h1>
+			<h1> DASHBOARD COMPONENTS UNDER DEVELOPMENT. <br />
+				TILL THEN HAVE A LOOK AT OUR ALREADY DEVELOPED FUNCTIONALITY.
+			</h1>
 		</div>
 	);
 }
