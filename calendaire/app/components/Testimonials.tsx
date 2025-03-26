@@ -15,31 +15,25 @@ export default function TestimonialsSection() {
             {
               name: "Alex Thompson",
               role: "CEO, TechStart",
-              image: "/testimonials/alex.jpg",
+              
               quote: "Calendaire has revolutionized how we handle meetings. The automated scheduling and reminders have saved us countless hours.",
             },
             {
               name: "Sarah Chen",
               role: "Product Manager, InnovateCo",
-              image: "/testimonials/sarah.jpg",
+             
               quote: "The interface is intuitive and the integration with our existing tools is seamless. It's exactly what we needed.",
             },
             {
               name: "Michael Rodriguez",
               role: "Sales Director, GrowthFirst",
-              image: "/testimonials/michael.jpg",
+             
               quote: "Since switching to Calendaire, our meeting attendance rate has improved significantly. The reminder system is fantastic!",
             },
           ].map((testimonial, index) => (
             <div key={index} className="relative p-8 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                
                 <div>
                   <h3 className="text-lg font-semibold text-white">{testimonial.name}</h3>
                   <p className="text-sm text-gray-400">{testimonial.role}</p>

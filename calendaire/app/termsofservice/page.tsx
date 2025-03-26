@@ -76,7 +76,7 @@ export default function TermsOfService() {
         {/* Governing Law */}
         <h2 className="text-xl font-semibold mt-8 text-primary">Governing Law</h2>
         <p className="mt-2 text-zinc-900 leading-relaxed">
-          These Terms are governed by and construed in accordance with the laws of India. Any disputes arising from these Terms will be resolved exclusively in the courts located in [Your Jurisdiction].
+          These Terms are governed by and construed in accordance with the laws of India. Any disputes arising from these Terms will be resolved exclusively in the courts located in [Lucknow,INDIA].
         </p>
 
         {/* Changes to These Terms */}
