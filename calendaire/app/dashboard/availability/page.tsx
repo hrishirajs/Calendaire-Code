@@ -43,7 +43,7 @@ export default async function Availability(){
 				</CardHeader>
 				
 				<Tabs defaultValue="general" className="w-full">
-					<TabsList className="grid w-full grid-cols-2 mx-4 mb-4">
+					<TabsList className="grid w-full grid-cols-2 mb-4">
 						<TabsTrigger value="general">General Settings</TabsTrigger>
 						<TabsTrigger value="hourly">Hourly Settings</TabsTrigger>
 					</TabsList>
