@@ -1,4 +1,6 @@
 import { conformZodMessage } from '@conform-to/zod';
+import { url } from 'inspector';
+import { title } from 'process';
 import {z} from 'zod';
 export const onboardingSchema =z.object({
 	fullName:z.string().min(3).max(150),
@@ -42,3 +44,12 @@ export function onboardingSchemaValidation(options?:{
 export const settingsSchema=z.object({
 	fullname:z.string().min(3).max(150)
 })
+
+
+export const eventTypeSchema=z.object({
+	title:z.string().min(3).max(150),
+	duration:z.number().min(15).max(60),
+	url:z.string().min(3).max(150),
+	description:z.string().min(3).max(500),
+	videoCallSoftware:z.string().min(3).max(150)
+});
