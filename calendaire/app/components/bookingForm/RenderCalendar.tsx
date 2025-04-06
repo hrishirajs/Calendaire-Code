@@ -10,14 +10,24 @@ import {
   today,
   parseDate,
 } from "@internationalized/date";
+import { SelectedDateInfo } from "./SelectedDateInfo";
+
+interface AvailabilityDay {
+  id: string;
+  day: string;
+  isActive: boolean;
+}
 
 interface iAppProps {
-  daysofWeek: { day: string; isActive: boolean }[];
+  daysofWeek: AvailabilityDay[];
 }
 
 export function RenderCalendar({ daysofWeek }: iAppProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  // Debug logging
+  console.log("Availability days received:", daysofWeek);
 
   const [date, setDate] = useState<CalendarDate>(() => {
     const dateParam = searchParams.get("date");
@@ -32,7 +42,7 @@ export function RenderCalendar({ daysofWeek }: iAppProps) {
   }, [searchParams]);
 
   const handleChangeDate = (date: DateValue) => {
-    console.log(date);
+    console.log("Selected date:", date);
     setDate(date as CalendarDate);
     const url = new URL(window.location.href);
 
@@ -42,19 +52,41 @@ export function RenderCalendar({ daysofWeek }: iAppProps) {
   };
 
   const isDateUnavailable = (date: DateValue) => {
-    const dayOfWeek = date.toDate(getLocalTimeZone()).getDay();
-    // Adjust the index to match the daysofWeek array
-    const adjustedIndex = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
-    return !daysofWeek[adjustedIndex].isActive;
+    // Map day names to their positions (0-6)
+    const dayMap: Record<string, number> = {
+      "Monday": 0,
+      "Tuesday": 1,
+      "Wednesday": 2,
+      "Thursday": 3,
+      "Friday": 4,
+      "Saturday": 5,
+      "Sunday": 6
+    };
+    
+    // Get the day of the week (0 = Sunday, 1 = Monday, etc.)
+    const jsDayOfWeek = date.toDate(getLocalTimeZone()).getDay();
+    
+    // Convert JS day (0-6, starting with Sunday) to our day format (Monday-Sunday)
+    const dayName = Object.keys(dayMap).find(
+      day => dayMap[day] === (jsDayOfWeek === 0 ? 6 : jsDayOfWeek - 1)
+    );
+    
+    if (!dayName) return true; // If we can't determine the day, mark as unavailable
+    
+    const dayAvailability = daysofWeek.find(d => d.day === dayName);
+    return !dayAvailability?.isActive;
   };
 
   return (
-    <Calendar
-      minValue={today(getLocalTimeZone())}
-      defaultValue={today(getLocalTimeZone())}
-      value={date}
-      onChange={handleChangeDate}
-      isDateUnavailable={isDateUnavailable}
-    />
+    <div>
+      <Calendar
+        minValue={today(getLocalTimeZone())}
+        defaultValue={today(getLocalTimeZone())}
+        value={date}
+        onChange={handleChangeDate}
+        isDateUnavailable={isDateUnavailable}
+      />
+      <SelectedDateInfo selectedDate={date} />
+    </div>
   );
 }

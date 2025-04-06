@@ -3,6 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CalendarX2, Clock, VideoIcon } from "lucide-react";
 import { notFound } from "next/navigation";
+import { RenderCalendar } from "@/app/components/bookingForm/RenderCalendar";
+import { DebugAvailability } from "@/app/components/bookingForm/DebugAvailability";
+
 async function getData(eventURL:string, userName:string){
 	const data=await prisma.eventType.findFirst({
 		where:{
@@ -24,13 +27,12 @@ async function getData(eventURL:string, userName:string){
 					name:true,
 					availability:{
 						select:{
+							id: true,
 							day:true,
 							isActive:true,
 						}
 					}
 				}
-
-
 			}
 		}
 	});
@@ -42,40 +44,68 @@ async function getData(eventURL:string, userName:string){
 
 export default async function BookingFormRoute({params,}:{params:{username:string, eventURL:string}}) {
 	const data=await getData(params.eventURL, params.username);
+	
+	// Format availability data for the RenderCalendar component
+	const availability = data.User?.availability || [];
+	
 	return(
-		<div className="min-h-screen w-screen flex items-center justify-center">
-			<Card className="max-w-[1000px] w-full mx-auto">
-				<CardContent className="p-5 md:grid-cols-[1fr,auto,1fr, auto,1fr]"> 
-					<div>
-						<img src={data.User?.image as string} alt="Profile Image" className="size-10 rounded-full"/>
-						<p className="text-sm font-medium text-muted-foreground mt-1  ">{data.User?.name}</p>
-						<h1 className="text-xl font-semibold mt-2 ">{data.title}</h1>
-						<p className="text-sm font-medium text-muted-foreground">{data.description}</p>
+		<div className="min-h-screen w-full flex items-center justify-center py-10 px-4">
+			<Card className="w-full max-w-6xl shadow-lg">
+				<CardContent className="p-0">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr,auto,1fr]">
+						{/* Event Information */}
+						<div className="p-6 md:p-8">
+							<div className="flex items-center space-x-3 mb-4">
+								<img 
+									src={data.User?.image as string} 
+									alt={`${data.User?.name}'s profile`} 
+									className="size-12 rounded-full object-cover border"
+								/>
+								<div>
+									<p className="text-sm font-medium text-muted-foreground">{data.User?.name}</p>
+								</div>
+							</div>
+							
+							<h1 className="text-2xl font-bold mb-2">{data.title}</h1>
+							<p className="text-muted-foreground mb-5">{data.description}</p>
 
-						<div className="mt-5 flex felx-col gap-y-3">
-							<p className="felx items-center" ><CalendarX2 className="size-4 mr-2 text-primary"/>
-							 	<span className="text-sm font-medium text-muted-foreground">
-							 		
-							 	</span>
-							</p>
-							<p className="felx items-center" ><Clock className="size-4 mr-2 text-primary"/>
-							 	<span className="text-sm font-medium text-muted-foreground">
-							 		{data.duration} minutes
-							 	</span>
-							</p>
-							<p className="felx items-center" ><VideoIcon className="size-4 mr-2 text-primary"/>
-							 	<span className="text-sm font-medium text-muted-foreground">
-							 		{data.videoCallSoftware}
-							 	</span>
-							</p>
-
+							<div className="space-y-3">
+								<div className="flex items-center">
+									<Clock className="size-5 mr-3 text-primary"/>
+									<span className="text-sm">
+										{data.duration} minutes
+									</span>
+								</div>
+								
+								{data.videoCallSoftware && (
+									<div className="flex items-center">
+										<VideoIcon className="size-5 mr-3 text-primary"/>
+										<span className="text-sm">
+											{data.videoCallSoftware}
+										</span>
+									</div>
+								)}
+							</div>
+						</div>
+						
+						{/* Separator (only visible on larger screens) */}
+						<div className="hidden lg:block">
+							<Separator orientation="vertical" className="h-full" />
+						</div>
+						
+						{/* Calendar */}
+						<div className="p-6 md:p-8 border-t md:border-t-0 md:border-l">
+							<h2 className="text-lg font-semibold mb-4">Select a Date & Time</h2>
+							<RenderCalendar daysofWeek={availability} />
+							
+							{/* Only show in development */}
+							{process.env.NODE_ENV === 'development' && (
+								<DebugAvailability availability={availability} />
+							)}
 						</div>
 					</div>
-					<Separator orientation="vertical" className="h-full w-[1px]"/>
 				</CardContent>
-
 			</Card>
 		</div>
-	)
-
+	);
 }
