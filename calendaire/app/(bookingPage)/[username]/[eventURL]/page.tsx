@@ -1,10 +1,9 @@
 import prisma from "@/app/lib/db";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CalendarX2, Clock, VideoIcon } from "lucide-react";
+import { Clock, VideoIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import { RenderCalendar } from "@/app/components/bookingForm/RenderCalendar";
-import { DebugAvailability } from "@/app/components/bookingForm/DebugAvailability";
 
 async function getData(eventURL:string, userName:string){
 	const data=await prisma.eventType.findFirst({
@@ -42,8 +41,19 @@ async function getData(eventURL:string, userName:string){
 	return data;
 }
 
-export default async function BookingFormRoute({params,}:{params:{username:string, eventURL:string}}) {
-	const data=await getData(params.eventURL, params.username);
+type BookingParams = {
+	params: {
+		username: string;
+		eventURL: string;
+	};
+};
+
+export default async function BookingFormRoute({ params }: BookingParams) {
+	// Await params to ensure they're ready before use
+	const resolvedParams = await Promise.resolve(params);
+	const { username, eventURL } = resolvedParams;
+	
+	const data = await getData(eventURL, username);
 	
 	// Format availability data for the RenderCalendar component
 	const availability = data.User?.availability || [];
@@ -97,11 +107,6 @@ export default async function BookingFormRoute({params,}:{params:{username:strin
 						<div className="p-6 md:p-8 border-t md:border-t-0 md:border-l">
 							<h2 className="text-lg font-semibold mb-4">Select a Date & Time</h2>
 							<RenderCalendar daysofWeek={availability} />
-							
-							{/* Only show in development */}
-							{process.env.NODE_ENV === 'development' && (
-								<DebugAvailability availability={availability} />
-							)}
 						</div>
 					</div>
 				</CardContent>

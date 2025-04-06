@@ -44,11 +44,15 @@ export function RenderCalendar({ daysofWeek }: iAppProps) {
   const handleChangeDate = (date: DateValue) => {
     console.log("Selected date:", date);
     setDate(date as CalendarDate);
+    
+    // Create a new URL object
     const url = new URL(window.location.href);
-
+    
+    // Update the date parameter
     url.searchParams.set("date", date.toString());
-
-    router.push(url.toString());
+    
+    // Replace the current URL instead of pushing to history stack
+    router.replace(url.toString());
   };
 
   const isDateUnavailable = (date: DateValue) => {
