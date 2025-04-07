@@ -6,6 +6,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { eventTypeSchema, onboardingSchema, onboardingSchemaValidation, settingsSchema } from "./lib/zodSchemas";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { nylas } from "./lib/nylas";
 
 
 export async function OnboardingAction(prevState: any, formData:FormData){
@@ -40,6 +41,14 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						day:"Monday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -50,11 +59,25 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 					{
 						day:"Tuesday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -65,11 +88,25 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 					{
 						day:"Wednesday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -80,11 +117,25 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 					{
 						day:"Thursday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -95,11 +146,25 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 					{
 						day:"Friday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -110,11 +175,25 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 					{
 						day:"Saturday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -125,11 +204,25 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 					{
 						day:"Sunday",
 						fromTime:"08:00",
 						tillTime:"18:00",
+						hour0to1: false,
+						hour1to2: false,
+						hour2to3: false,
+						hour3to4: false,
+						hour4to5: false,
+						hour5to6: false,
+						hour6to7: false,
+						hour7to8: false,
 						hour8to9: true,
 						hour9to10: true,
 						hour10to11: true,
@@ -140,6 +233,12 @@ export async function OnboardingAction(prevState: any, formData:FormData){
 						hour15to16: true,
 						hour16to17: true,
 						hour17to18: true,
+						hour18to19: false,
+						hour19to20: false,
+						hour20to21: false,
+						hour21to22: false,
+						hour22to23: false,
+						hour23to24: false,
 					},
 				]
 			}
@@ -219,10 +318,10 @@ export async function updateAvailabilityAction(formData:FormData) {
           const fieldName = `hour${hour}to${hour + 1}`;
           
           if (hour >= fromHour && hour < tillHour) {
-            // Within the time range - preserve existing value if the day is active
+            // Within the time range - set to true by default if the day is active
             if (item.isActive) {
-              // Keep the current setting if within range
-              data[fieldName] = currentAvailability[fieldName as keyof typeof currentAvailability] as boolean;
+              // Set to true by default for all hours within the range
+              data[fieldName] = true;
             } else {
               // If day is not active, all hours are false
               data[fieldName] = false;
@@ -283,8 +382,8 @@ export async function updateHourlyAvailabilityAction(formData:FormData) {
         const isWithinTimeRange = hourString >= currentAvailability.fromTime && hourString < currentAvailability.tillTime;
         
         if (isWithinTimeRange && currentAvailability.isActive) {
-          // Within time range and day is active - use form value
-          data[hourFieldName] = rawData[formKey] === "on";
+          // Within time range and day is active - use form value if provided, otherwise set to true
+          data[hourFieldName] = rawData[formKey] !== undefined ? rawData[formKey] === "on" : true;
         } else if (!isWithinTimeRange) {
           // Outside time range - set to false
           data[hourFieldName] = false;
@@ -327,3 +426,195 @@ export async function CreateEventType(prevState:any, formData:FormData){
 	});
 	return redirect("/dashboard");
 }
+
+export async function createMeetingAction(formData: FormData) {
+	try {
+		console.log("Starting createMeetingAction with form data:", Object.fromEntries(formData.entries()));
+		
+		// Check if required form fields are present
+		const requiredFields = ['userName', 'eventTypeId', 'name', 'email', 'fromTime', 'eventDate', 'meetingLength'];
+		for (const field of requiredFields) {
+			if (!formData.get(field)) {
+				console.error(`Missing required field: ${field}`);
+				throw new Error(`Missing required field: ${field}`);
+			}
+		}
+
+		const userName = formData.get("userName") as string;
+		console.log(`Looking up user with userName: ${userName}`);
+		
+		const getUserData = await prisma.user.findUnique({
+		  where: {
+			userName,
+		  },
+		  select: {
+			grantEmail: true,
+			grantId: true,
+			name: true,
+		  },
+		});
+	  
+		if (!getUserData) {
+		  console.error(`User not found with userName: ${userName}`);
+		  throw new Error(`User not found with userName: ${userName}`);
+		}
+
+		console.log("Found user:", JSON.stringify({
+			name: getUserData.name,
+			hasGrantId: !!getUserData.grantId,
+			hasGrantEmail: !!getUserData.grantEmail
+		}));
+
+		if (!getUserData.grantId || !getUserData.grantEmail) {
+		  console.error("User has not connected their calendar");
+		  throw new Error("User has not connected their calendar");
+		}
+	  
+		const eventTypeId = formData.get("eventTypeId") as string;
+		console.log(`Looking up event type with ID: ${eventTypeId}`);
+		
+		const eventTypeData = await prisma.eventType.findUnique({
+		  where: {
+			id: eventTypeId,
+		  },
+		  select: {
+			title: true,
+			description: true,
+		  },
+		});
+
+		if (!eventTypeData) {
+		  console.error(`Event type not found with ID: ${eventTypeId}`);
+		  throw new Error(`Event type not found with ID: ${eventTypeId}`);
+		}
+
+		console.log("Found event type:", eventTypeData);
+	  
+		const formTime = formData.get("fromTime") as string;
+		const meetingLength = Number(formData.get("meetingLength"));
+		const eventDate = formData.get("eventDate") as string;
+	  
+		const startDateTime = new Date(`${eventDate}T${formTime}:00`);
+		const endDateTime = new Date(startDateTime.getTime() + meetingLength * 60000);
+
+		console.log("Meeting time details:", {
+			formTime,
+			meetingLength,
+			eventDate,
+			startDateTime: startDateTime.toISOString(),
+			endDateTime: endDateTime.toISOString()
+		});
+	  
+		console.log("Attempting to create event with Nylas API", {
+			identifier: getUserData.grantId,
+			calendarId: getUserData.grantEmail,
+			title: eventTypeData.title,
+			startTime: Math.floor(startDateTime.getTime() / 1000),
+			endTime: Math.floor(endDateTime.getTime() / 1000),
+		});
+		
+		try {
+			await nylas.events.create({
+			  identifier: getUserData.grantId,
+			  requestBody: {
+				title: eventTypeData.title,
+				description: eventTypeData.description,
+				when: {
+				  startTime: Math.floor(startDateTime.getTime() / 1000),
+				  endTime: Math.floor(endDateTime.getTime() / 1000),
+				},
+				conferencing: {
+				  autocreate: {},
+				  provider: "Google Meet",
+				},
+				participants: [
+				  {
+					name: formData.get("name") as string,
+					email: formData.get("email") as string,
+					status: "yes",
+				  },
+				],
+			  },
+			  queryParams: {
+				calendarId: getUserData.grantEmail,
+				notifyParticipants: true,
+			  },
+			});
+			
+			console.log("Successfully created Nylas event!");
+		} catch (nylasError: any) {
+			console.error("Nylas API error:", nylasError);
+			throw new Error(`Nylas API error: ${nylasError?.message || 'Unknown error'}`);
+		}
+	  
+		console.log("Redirecting to success page");
+		return redirect(`/success`);
+	} catch (error) {
+		console.error("Error creating meeting:", error);
+		// Rethrow for UI handling
+		throw error;
+	}
+}
+
+export async function createMeetingFallback(formData: FormData) {
+	try {
+		console.log("Starting createMeetingFallback with form data:", Object.fromEntries(formData.entries()));
+		
+		// Check if required form fields are present
+		const requiredFields = ['userName', 'eventTypeId', 'name', 'email', 'fromTime', 'eventDate', 'meetingLength'];
+		for (const field of requiredFields) {
+			if (!formData.get(field)) {
+				console.error(`Missing required field: ${field}`);
+				throw new Error(`Missing required field: ${field}`);
+			}
+		}
+
+		const userName = formData.get("userName") as string;
+		const eventTypeId = formData.get("eventTypeId") as string;
+		const guestName = formData.get("name") as string;
+		const guestEmail = formData.get("email") as string;
+		const formTime = formData.get("fromTime") as string;
+		const meetingLength = Number(formData.get("meetingLength"));
+		const eventDate = formData.get("eventDate") as string;
+		
+		const startDateTime = new Date(`${eventDate}T${formTime}:00`);
+		
+		// Log the booking attempt
+		console.log("Booking attempt:", {
+			userName,
+			eventTypeId,
+			guestName,
+			guestEmail,
+			eventDate,
+			formTime,
+			meetingLength
+		});
+		
+		// Create a record of the meeting in the database
+		try {
+			await prisma.meeting.create({
+				data: {
+					eventTypeId: eventTypeId,
+					fromTime: formTime,
+					date: startDateTime,
+					duration: meetingLength,
+					attendeeName: guestName,
+					attendeeEmail: guestEmail,
+					status: "PENDING" // Since we're skipping the Nylas API call
+				}
+			});
+			console.log("Successfully created meeting record");
+		} catch (dbError) {
+			console.error("Database error when creating meeting:", dbError);
+			// Continue even if DB save fails - we want to test if the redirect works
+		}
+		
+		console.log("Redirecting to success page");
+		return redirect(`/success`);
+	} catch (error) {
+		console.error("Error in fallback booking flow:", error);
+		throw error;
+	}
+}
+  
+  

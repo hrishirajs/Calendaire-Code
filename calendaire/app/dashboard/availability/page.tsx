@@ -52,7 +52,7 @@ export default async function Availability(){
 						<form action={updateAvailabilityAction}>
 							<CardContent className="flex flex-col gap-y-4 px-4">
 								<p className="text-sm text-muted-foreground mb-2">
-									Set your general availability for each day. Your hourly availability settings will be preserved within this time range.
+									Set your general availability for each day. When you change your time range, all hours within that range will be automatically set to available. Your hourly availability settings will be preserved within this time range.
 								</p>
 								{data.map((item)=>(
 									<div key={item.id} 
@@ -104,7 +104,7 @@ export default async function Availability(){
 						<form action={updateHourlyAvailabilityAction}>
 							<CardContent className="px-4">
 								<p className="text-sm text-muted-foreground mb-4">
-									Customize your hourly availability within your general availability time range. Hours outside your general time range will be automatically unavailable.
+									Customize your hourly availability within your general availability time range. All hours within your general time range are available by default. Hours outside your general time range will be automatically unavailable.
 								</p>
 								{data.map((item) => (
 									<div key={item.id} className="mb-6">

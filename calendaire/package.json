@@ -33,6 +33,7 @@
     "radix-ui": "^1.1.2",
     "react": "^19.0.0",
     "react-aria-components": "^1.7.1",
+    "react-day-picker": "^9.6.5",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
