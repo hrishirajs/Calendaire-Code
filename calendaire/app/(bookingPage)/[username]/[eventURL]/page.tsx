@@ -1,4 +1,4 @@
-import { createMeetingAction, createMeetingFallback } from "@/app/actions";
+import { createMeetingAction } from "@/app/actions";
 import { RenderCalendar } from "@/app/components/bookingForm/RenderCalendar";
 import { SubmitButton } from "@/app/components/SubmitButton";
 import { TimeSlots } from "@/app/components/TimeSlots";

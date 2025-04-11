@@ -1,12 +1,12 @@
 "use server";
 
-import prisma from "./lib/db";
+import { nylas } from "./lib/nylas";
+import prisma from "../lib/prisma";
 import { requireUser } from "./lib/hooks";
 import { parseWithZod } from "@conform-to/zod";
 import { eventTypeSchema, onboardingSchema, onboardingSchemaValidation, settingsSchema } from "./lib/zodSchemas";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { nylas } from "./lib/nylas";
 
 
 export async function OnboardingAction(prevState: any, formData:FormData){
@@ -552,67 +552,6 @@ export async function createMeetingAction(formData: FormData) {
 	} catch (error) {
 		console.error("Error creating meeting:", error);
 		// Rethrow for UI handling
-		throw error;
-	}
-}
-
-export async function createMeetingFallback(formData: FormData) {
-	try {
-		console.log("Starting createMeetingFallback with form data:", Object.fromEntries(formData.entries()));
-		
-		// Check if required form fields are present
-		const requiredFields = ['userName', 'eventTypeId', 'name', 'email', 'fromTime', 'eventDate', 'meetingLength'];
-		for (const field of requiredFields) {
-			if (!formData.get(field)) {
-				console.error(`Missing required field: ${field}`);
-				throw new Error(`Missing required field: ${field}`);
-			}
-		}
-
-		const userName = formData.get("userName") as string;
-		const eventTypeId = formData.get("eventTypeId") as string;
-		const guestName = formData.get("name") as string;
-		const guestEmail = formData.get("email") as string;
-		const formTime = formData.get("fromTime") as string;
-		const meetingLength = Number(formData.get("meetingLength"));
-		const eventDate = formData.get("eventDate") as string;
-		
-		const startDateTime = new Date(`${eventDate}T${formTime}:00`);
-		
-		// Log the booking attempt
-		console.log("Booking attempt:", {
-			userName,
-			eventTypeId,
-			guestName,
-			guestEmail,
-			eventDate,
-			formTime,
-			meetingLength
-		});
-		
-		// Create a record of the meeting in the database
-		try {
-			await prisma.meeting.create({
-				data: {
-					eventTypeId: eventTypeId,
-					fromTime: formTime,
-					date: startDateTime,
-					duration: meetingLength,
-					attendeeName: guestName,
-					attendeeEmail: guestEmail,
-					status: "PENDING" // Since we're skipping the Nylas API call
-				}
-			});
-			console.log("Successfully created meeting record");
-		} catch (dbError) {
-			console.error("Database error when creating meeting:", dbError);
-			// Continue even if DB save fails - we want to test if the redirect works
-		}
-		
-		console.log("Redirecting to success page");
-		return redirect(`/success`);
-	} catch (error) {
-		console.error("Error in fallback booking flow:", error);
 		throw error;
 	}
 }
