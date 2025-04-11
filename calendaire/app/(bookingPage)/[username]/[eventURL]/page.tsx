@@ -82,11 +82,11 @@ const BookingPage = async ({
       <DebugFormData />
       
       {showForm ? (
-        <Card className="max-w-[650px] w-full shadow-lg border-slate-200 dark:border-slate-800 overflow-hidden animate-in slide-in-from-bottom-5 fade-in-50 duration-500">
+        <Card className="max-w-[900px] w-full shadow-lg border-slate-200 dark:border-slate-800 overflow-hidden animate-in slide-in-from-bottom-5 fade-in-50 duration-500">
           <div className="bg-primary/5 dark:bg-primary/10 p-4 border-b border-primary/10 dark:border-primary/20">
             <h1 className="text-2xl font-bold text-center">Complete Your Booking</h1>
           </div>
-          <CardContent className="p-6 grid md:grid-cols-[1fr,auto,1fr] gap-6">
+          <CardContent className="p-6 grid grid-cols-1 md:grid-cols-[1fr,auto,1fr] lg:grid-cols-[1.2fr,auto,1fr] gap-6">
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="relative">

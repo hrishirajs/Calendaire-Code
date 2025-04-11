@@ -189,12 +189,16 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
     if (slots.length === 0) return null;
     
     return (
-      <div className="mb-6">
-        <h3 className="text-sm font-medium text-muted-foreground mb-3 flex items-center">
-          {icon}
-          <span className="ml-2">{title}</span>
-          <span className="ml-1 text-xs text-muted-foreground/70">({slots.length} slots)</span>
-        </h3>
+      <div>
+        <div className="flex items-center mb-4">
+          <div className="flex items-center">
+            {icon}
+            <span className="ml-2 text-base font-medium text-foreground">{title}</span>
+          </div>
+          <div className="ml-3 px-2 py-0.5 rounded-full bg-muted/50 text-xs font-medium text-muted-foreground">
+            {slots.length} slots
+          </div>
+        </div>
         <motion.div 
           variants={container}
           initial="hidden"
@@ -209,22 +213,24 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
             const hour12 = formatHour(hour);
             
             return (
-              <motion.div key={time} variants={item} className="w-[calc(50%-4px)] sm:w-[calc(33.333%-6px)] md:w-[calc(25%-6px)]">
-                <Button
-                  variant={selectedTime === time ? "default" : "outline"}
+              <motion.div key={time} variants={item}>
+                <button
                   onClick={() => handleTimeSelect(time)}
-                  className={`w-full h-auto py-2.5 transition-all duration-200 ${
-                    selectedTime === time 
-                      ? 'bg-primary text-primary-foreground shadow-md font-medium' 
-                      : 'hover:border-primary/50 hover:bg-primary/5 hover:text-primary'
-                  }`}
                   disabled={isLoading}
+                  className={`
+                    relative px-4 h-12 rounded-full transition-all duration-200
+                    ${selectedTime === time 
+                      ? 'bg-primary text-primary-foreground font-medium shadow-sm' 
+                      : 'text-foreground hover:bg-primary/10 hover:text-primary'
+                    }
+                    disabled:opacity-50 disabled:cursor-not-allowed
+                  `}
                 >
-                  <span className="flex items-center justify-center">
-                    <span className="text-base">{hour12}:{minutes}</span>
-                    <span className="text-xs ml-1">{ampm}</span>
-                  </span>
-                </Button>
+                  <div className="flex items-baseline space-x-1">
+                    <span className="text-base tabular-nums">{hour12}:{minutes}</span>
+                    <span className="text-xs">{ampm}</span>
+                  </div>
+                </button>
               </motion.div>
             );
           })}
@@ -237,46 +243,44 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      <h2 className="text-lg font-medium mb-4 text-center md:text-left flex items-center justify-center md:justify-start">
+      <h2 className="text-lg font-medium mb-8 text-center md:text-left flex items-center justify-center md:justify-start">
         <Clock className="size-4 mr-2 text-primary" />
         Available Times
       </h2>
-      <div className="bg-muted/30 hover:bg-muted/40 transition-colors p-4 rounded-lg border border-border/40">
-        {timeSlots.length > 0 ? (
-          <div className="max-h-[350px] overflow-y-auto pr-1 space-y-4">
-            {renderTimeGroup(morningSlots, "Morning", <Sunrise className="size-4 text-amber-500" />)}
-            {renderTimeGroup(afternoonSlots, "Afternoon", <Sun className="size-4 text-orange-500" />)}
-            {renderTimeGroup(eveningSlots, "Evening", <Sunset className="size-4 text-indigo-500" />)}
-          </div>
-        ) : (
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="text-center py-10 px-4"
-          >
-            {apiError ? (
-              <>
-                <AlertCircle className="mx-auto mb-3 size-8 text-red-500" />
-                <p className="font-medium text-red-600 dark:text-red-400">Error loading time slots</p>
-                <p className="text-sm mt-2 text-muted-foreground max-w-[250px] mx-auto">{apiError}</p>
-              </>
-            ) : isToday ? (
-              <>
-                <AlertCircle className="mx-auto mb-3 size-8 text-amber-500" />
-                <p className="font-medium text-amber-700 dark:text-amber-400">No available time slots for today</p>
-                <p className="text-sm mt-2 text-muted-foreground">Please select a future date to see available slots.</p>
-              </>
-            ) : (
-              <>
-                <Clock className="mx-auto mb-3 size-8 text-muted-foreground/70" />
-                <p className="font-medium text-foreground/80">No available time slots</p>
-                <p className="text-sm mt-2 text-muted-foreground">The host doesn't have available times for this date.</p>
-              </>
-            )}
-          </motion.div>
-        )}
-      </div>
+      {timeSlots.length > 0 ? (
+        <div className="space-y-10">
+          {renderTimeGroup(morningSlots, "Morning", <Sunrise className="size-4 text-amber-500" />)}
+          {renderTimeGroup(afternoonSlots, "Afternoon", <Sun className="size-4 text-orange-500" />)}
+          {renderTimeGroup(eveningSlots, "Evening", <Sunset className="size-4 text-indigo-500" />)}
+        </div>
+      ) : (
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="text-center py-10"
+        >
+          {apiError ? (
+            <>
+              <AlertCircle className="mx-auto mb-3 size-8 text-red-500" />
+              <p className="font-medium text-red-600 dark:text-red-400">Error loading time slots</p>
+              <p className="text-sm mt-2 text-muted-foreground max-w-[250px] mx-auto">{apiError}</p>
+            </>
+          ) : isToday ? (
+            <>
+              <AlertCircle className="mx-auto mb-3 size-8 text-amber-500" />
+              <p className="font-medium text-amber-700 dark:text-amber-400">No available time slots for today</p>
+              <p className="text-sm mt-2 text-muted-foreground">Please select a future date to see available slots.</p>
+            </>
+          ) : (
+            <>
+              <Clock className="mx-auto mb-3 size-8 text-muted-foreground/70" />
+              <p className="font-medium text-foreground/80">No available time slots</p>
+              <p className="text-sm mt-2 text-muted-foreground">The host doesn't have available times for this date.</p>
+            </>
+          )}
+        </motion.div>
+      )}
     </div>
   );
 }; 

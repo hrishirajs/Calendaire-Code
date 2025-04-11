@@ -143,15 +143,19 @@ import {
 	);
   
 	return (
-	  <div className="flex flex-col">
-		<h2 className="text-lg font-medium mb-4">Available Time Slots</h2>
-		<div className="grid grid-cols-2 gap-2 max-h-[300px] overflow-y-auto">
+	  <div className="flex flex-col w-full">
+		<h2 className="text-lg font-medium mb-4">Available Times</h2>
+		<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 max-h-[400px] overflow-y-auto p-2">
 		  {availableSlots.map((slot) => (
 			<Link
 			  key={slot.toISOString()}
 			  href={`?date=${formattedDate}&time=${format(slot, "HH:mm")}`}
+			  className="w-full"
 			>
-			  <Button variant="outline" className="w-full text-sm">
+			  <Button 
+				variant="outline" 
+				className="w-full text-sm h-10 px-2"
+			  >
 				{format(slot, "h:mm a")}
 			  </Button>
 			</Link>
