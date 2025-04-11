@@ -557,3 +557,71 @@ export async function createMeetingAction(formData: FormData) {
 }
   
   
+
+
+export async function cancelMeetingAction(formData: FormData) {
+  try {
+    const session = await requireUser();
+    if (!session?.user?.id) {
+      return { success: false, error: "Unauthorized - Please sign in" };
+    }
+
+    const eventId = formData.get("eventId") as string;
+    if (!eventId) {
+      return { success: false, error: "Event ID is required" };
+    }
+
+    const userData = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+      select: {
+        grantId: true,
+        grantEmail: true,
+      },
+    });
+
+    if (!userData) {
+      return { success: false, error: "User not found" };
+    }
+
+    if (!userData.grantId || !userData.grantEmail) {
+      return { success: false, error: "User has not connected their calendar" };
+    }
+
+    // Delete event from Nylas
+    try {
+      await nylas.events.destroy({
+        eventId,
+        identifier: userData.grantId,
+        queryParams: {
+          calendarId: userData.grantEmail,
+        },
+      });
+    } catch (nylasError: any) {
+      console.error("Nylas API error:", nylasError);
+      return { success: false, error: `Failed to delete event from calendar: ${nylasError.message}` };
+    }
+
+    // Update meeting status in our database
+    try {
+      await prisma.meeting.updateMany({
+        where: {
+          eventTypeId: eventId,
+          status: "SCHEDULED"
+        },
+        data: {
+          status: "CANCELLED"
+        }
+      });
+    } catch (dbError: any) {
+      console.error("Database error:", dbError);
+      return { success: false, error: "Failed to update meeting status" };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error cancelling meeting:", error);
+    return { success: false, error: "Failed to cancel meeting" };
+  }
+}
