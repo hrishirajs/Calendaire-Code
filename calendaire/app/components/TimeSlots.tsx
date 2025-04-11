@@ -61,7 +61,11 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
 
         // Get free/busy data from our API
         const formattedDate = format(selectedDate, 'yyyy-MM-dd');
-        const freeBusyResponse = await fetch(`/api/freebusy?userName=${userName}&date=${formattedDate}`);
+        const freeBusyResponse = await fetch(`/api/freebusy?userName=${userName}&date=${formattedDate}`, {
+          headers: {
+            'x-timezone': Intl.DateTimeFormat().resolvedOptions().timeZone
+          }
+        });
         
         if (!freeBusyResponse.ok) {
           const errorData = await freeBusyResponse.json();
@@ -69,6 +73,19 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
         }
         
         const busySlots: BusySlot[] = await freeBusyResponse.json();
+        
+        console.log('Selected date:', {
+          raw: selectedDate,
+          formatted: formattedDate,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        });
+        
+        console.log('Received busy slots:', busySlots.map(slot => ({
+          start: new Date(slot.start_time * 1000).toISOString(),
+          end: new Date(slot.end_time * 1000).toISOString(),
+          local_start: new Date(slot.start_time * 1000).toLocaleString(),
+          local_end: new Date(slot.end_time * 1000).toLocaleString()
+        })));
         
         // Generate slots based on the user's configured availability and free/busy data
         generateTimeSlots(availabilityData, busySlots);
@@ -82,9 +99,22 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
     // Generate time slots for the selected date based on availability and free/busy data
     const generateTimeSlots = (availability: Availability, busySlots: BusySlot[]) => {
       try {
+        console.log('Generating time slots with:', {
+          availability,
+          busySlots: busySlots.map(slot => ({
+            start: new Date(slot.start_time * 1000).toISOString(),
+            end: new Date(slot.end_time * 1000).toISOString()
+          }))
+        });
+
         // Parse the fromTime and tillTime
         const startTime = parse(`${format(selectedDate, 'yyyy-MM-dd')} ${availability.fromTime}`, 'yyyy-MM-dd HH:mm', new Date());
         const endTime = parse(`${format(selectedDate, 'yyyy-MM-dd')} ${availability.tillTime}`, 'yyyy-MM-dd HH:mm', new Date());
+        
+        console.log('Time range:', {
+          startTime: startTime.toISOString(),
+          endTime: endTime.toISOString()
+        });
         
         // Generate slots based on fromTime and tillTime
         const slots: string[] = [];
@@ -123,11 +153,26 @@ export const TimeSlots: React.FC<TimeSlotsProps> = ({
               const busyStart = fromUnixTime(busySlot.start_time);
               const busyEnd = fromUnixTime(busySlot.end_time);
               
-              return (
+              const overlaps = (
                 (currentTime >= busyStart && currentTime < busyEnd) ||
                 (slotEndTime > busyStart && slotEndTime <= busyEnd) ||
                 (currentTime <= busyStart && slotEndTime >= busyEnd)
               );
+
+              if (overlaps) {
+                console.log('Slot overlaps with busy time:', {
+                  slot: {
+                    start: currentTime.toISOString(),
+                    end: slotEndTime.toISOString()
+                  },
+                  busySlot: {
+                    start: busyStart.toISOString(),
+                    end: busyEnd.toISOString()
+                  }
+                });
+              }
+              
+              return overlaps;
             });
             
             if (isSlotFree) {
