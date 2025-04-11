@@ -589,6 +589,19 @@ export async function cancelMeetingAction(formData: FormData) {
       return { success: false, error: "User has not connected their calendar" };
     }
 
+    // Get the Nylas event details to find the matching meeting
+    const nylasEvent = await nylas.events.find({
+      eventId,
+      identifier: userData.grantId,
+      queryParams: {
+        calendarId: userData.grantEmail,
+      },
+    });
+
+    if (!nylasEvent) {
+      return { success: false, error: "Event not found" };
+    }
+
     // Delete event from Nylas
     try {
       await nylas.events.destroy({
@@ -605,15 +618,24 @@ export async function cancelMeetingAction(formData: FormData) {
 
     // Update meeting status in our database
     try {
-      await prisma.meeting.updateMany({
+      // Find the meeting using the event details
+      const meeting = await prisma.meeting.findFirst({
         where: {
-          eventTypeId: eventId,
+          date: new Date(nylasEvent.data.when.startTime * 1000),
           status: "SCHEDULED"
-        },
-        data: {
-          status: "CANCELLED"
         }
       });
+
+      if (meeting) {
+        await prisma.meeting.update({
+          where: {
+            id: meeting.id
+          },
+          data: {
+            status: "CANCELLED"
+          }
+        });
+      }
     } catch (dbError: any) {
       console.error("Database error:", dbError);
       return { success: false, error: "Failed to update meeting status" };

@@ -12,9 +12,12 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { format, fromUnixTime } from "date-fns";
-import { Video } from "lucide-react";
+import { Calendar, Clock, Video, Users, X } from "lucide-react";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface NylasEvent {
   id: string;
@@ -88,7 +91,11 @@ export default function MeetingsPage() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   // Filter for future events that have conferencing details (meetings)
@@ -106,7 +113,16 @@ export default function MeetingsPage() {
   });
 
   return (
-    <>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Meetings</h1>
+          <p className="text-muted-foreground">
+            Manage your upcoming and past meetings
+          </p>
+        </div>
+      </div>
+
       {futureMeetings.length < 1 ? (
         <EmptyState
           title="No meetings found"
@@ -115,63 +131,72 @@ export default function MeetingsPage() {
           href="/dashboard/new"
         />
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>Bookings</CardTitle>
-            <CardDescription>
-              See upcoming and past events booked through your event type links.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {futureMeetings.map((item) => {
-              if (!item.when?.startTime || !item.when?.endTime) {
-                return null;
-              }
+        <div className="grid gap-6">
+          {futureMeetings.map((item) => {
+            if (!item.when?.startTime || !item.when?.endTime) {
+              return null;
+            }
 
-              return (
-                <div key={item.id}>
-                  <div className="grid grid-cols-3 justify-between items-center">
-                    <div>
-                      <p className="text-muted-foreground text-sm">
-                        {format(fromUnixTime(item.when.startTime), "EEE, dd MMM")}
-                      </p>
-                      <p className="text-muted-foreground text-xs pt-1">
-                        {format(fromUnixTime(item.when.startTime), "hh:mm a")} -{" "}
-                        {format(fromUnixTime(item.when.endTime), "hh:mm a")}
-                      </p>
-                      {item.conferencing?.details?.url && (
-                        <div className="flex items-center mt-1">
-                          <Video className="size-4 mr-2 text-primary" />{" "}
-                          <a
-                            className="text-xs text-primary underline underline-offset-4"
-                            target="_blank"
-                            href={item.conferencing.details.url}
-                          >
-                            Join Meeting
-                          </a>
-                        </div>
+            const startTime = fromUnixTime(item.when.startTime);
+            const endTime = fromUnixTime(item.when.endTime);
+            const isToday = format(startTime, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
+
+            return (
+              <Card key={item.id} className="overflow-hidden">
+                <div className="p-6">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1">
+                      <h3 className="text-lg font-semibold">{item.title}</h3>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Calendar className="h-4 w-4" />
+                        <span>{format(startTime, "EEEE, MMMM d, yyyy")}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Clock className="h-4 w-4" />
+                        <span>
+                          {format(startTime, "h:mm a")} - {format(endTime, "h:mm a")}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Users className="h-4 w-4" />
+                        <span>You and {item.participants[0]?.name || "Guest"}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {isToday && (
+                        <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
+                          Today
+                        </Badge>
                       )}
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8 text-destructive hover:text-destructive"
+                        onClick={() => handleCancel(item.id)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
                     </div>
-                    <div className="flex flex-col items-start">
-                      <h2 className="text-sm font-medium">{item.title}</h2>
-                      <p className="text-sm text-muted-foreground">
-                        You and {item.participants[0]?.name || "Guest"}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleCancel(item.id)}
-                      className="w-fit flex ml-auto bg-destructive text-destructive-foreground hover:bg-destructive/90 px-4 py-2 rounded-md text-sm"
-                    >
-                      Cancel Event
-                    </button>
                   </div>
-                  <Separator className="my-3" />
+
+                  {item.conferencing?.details?.url && (
+                    <div className="mt-4">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start gap-2"
+                        onClick={() => window.open(item.conferencing?.details?.url, '_blank')}
+                      >
+                        <Video className="h-4 w-4" />
+                        Join Meeting
+                      </Button>
+                    </div>
+                  )}
                 </div>
-              );
-            })}
-          </CardContent>
-        </Card>
+              </Card>
+            );
+          })}
+        </div>
       )}
-    </>
+    </div>
   );
 }
