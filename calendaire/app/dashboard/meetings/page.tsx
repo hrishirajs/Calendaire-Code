@@ -15,7 +15,6 @@ import { format, fromUnixTime } from "date-fns";
 import { Calendar, Clock, Video, Users, X } from "lucide-react";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
