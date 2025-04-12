@@ -118,18 +118,20 @@ return(
 							<div className="ml-5 w-0- flex-1">
 								<dl>
 									<dt className="text-sm font-medium text-muted-foreground">
-										{item.duration} Minutes Meeting
+										{item.title}
 									</dt>
 									<dd className="text-lg font-medium">
-										{item.url}
+										{item.duration} Minutes
 									</dd>
 								</dl>
 							</div>
 						</Link>
 						<div className="bg-muted px-5 py-3 flex items-center justify-between">
-							<Switch/>
-							<Button>
-								Edit Event
+							<Switch defaultChecked={item.active}/>
+							<Button asChild>
+								<Link href={`/dashboard/event/${item.id}`}>
+									Edit Event
+								</Link>
 							</Button>
 						</div>
 					</div>

@@ -33,6 +33,13 @@ export default async function EditRoute({
 	
 	return (
 		<EditEventForm
+			id={data.id}
+			title={data.title}
+			description={data.description}
+			duration={data.duration.toString()}
+			url={data.url}
+			videoCallSoftware={data.videoCallSoftware.toString() as any} // TODO: Fix this type
+
 			
 		/>
 	);
