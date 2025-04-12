@@ -589,19 +589,6 @@ export async function cancelMeetingAction(formData: FormData) {
       return { success: false, error: "User has not connected their calendar" };
     }
 
-    // Get the Nylas event details to find the matching meeting
-    const nylasEvent = await nylas.events.find({
-      eventId,
-      identifier: userData.grantId,
-      queryParams: {
-        calendarId: userData.grantEmail,
-      },
-    });
-
-    if (!nylasEvent) {
-      return { success: false, error: "Event not found" };
-    }
-
     // Delete event from Nylas
     try {
       await nylas.events.destroy({
@@ -616,12 +603,12 @@ export async function cancelMeetingAction(formData: FormData) {
       return { success: false, error: `Failed to delete event from calendar: ${nylasError.message}` };
     }
 
-    // Update meeting status in our database
+    // Update the specific meeting's status in our database
     try {
-      // Find the meeting using the event details
+      // First find the meeting that matches this Nylas event
       const meeting = await prisma.meeting.findFirst({
         where: {
-          date: new Date(nylasEvent.data.when.startTime * 1000),
+          id: eventId,
           status: "SCHEDULED"
         }
       });
