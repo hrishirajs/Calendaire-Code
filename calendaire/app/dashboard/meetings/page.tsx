@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 interface NylasEvent {
   id: string;
   title: string;
+  status?: string;
   when: {
     startTimezone: string;
     endTimezone: string;
@@ -108,7 +109,19 @@ export default function MeetingsPage() {
     }
     
     const eventDate = fromUnixTime(item.when.startTime);
-    return eventDate > new Date();
+    return eventDate > new Date() && item.status !== "cancelled";
+  });
+
+  const cancelledMeetings = meetings.filter((item) => {
+    if (!item.when?.startTime) {
+      return false;
+    }
+    
+    if (!item.conferencing?.details?.url) {
+      return false;
+    }
+    
+    return item.status === "cancelled";
   });
 
   return (
@@ -122,80 +135,128 @@ export default function MeetingsPage() {
         </div>
       </div>
 
-      {futureMeetings.length < 1 ? (
-        <EmptyState
-          title="No meetings found"
-          description="You don't have any meetings yet."
-          buttonText="Create a new event type"
-          href="/dashboard/new"
-        />
-      ) : (
-        <div className="grid gap-6">
-          {futureMeetings.map((item) => {
-            if (!item.when?.startTime || !item.when?.endTime) {
-              return null;
-            }
+      <div className="space-y-8">
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Upcoming Meetings</h2>
+          {futureMeetings.length < 1 ? (
+            <EmptyState
+              title="No upcoming meetings"
+              description="You don't have any upcoming meetings."
+              buttonText="Create a new event type"
+              href="/dashboard/new"
+            />
+          ) : (
+            <div className="grid gap-6">
+              {futureMeetings.map((item) => {
+                if (!item.when?.startTime || !item.when?.endTime) {
+                  return null;
+                }
 
-            const startTime = fromUnixTime(item.when.startTime);
-            const endTime = fromUnixTime(item.when.endTime);
-            const isToday = format(startTime, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
+                const startTime = fromUnixTime(item.when.startTime);
+                const endTime = fromUnixTime(item.when.endTime);
+                const isToday = format(startTime, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
 
-            return (
-              <Card key={item.id} className="overflow-hidden">
-                <div className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-1">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Calendar className="h-4 w-4" />
-                        <span>{format(startTime, "EEEE, MMMM d, yyyy")}</span>
+                return (
+                  <Card key={item.id} className="overflow-hidden">
+                    <div className="p-6">
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <h3 className="text-lg font-semibold">{item.title}</h3>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4" />
+                            <span>{format(startTime, "EEEE, MMMM d, yyyy")}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Clock className="h-4 w-4" />
+                            <span>
+                              {format(startTime, "h:mm a")} - {format(endTime, "h:mm a")}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Users className="h-4 w-4" />
+                            <span>You and {item.participants[0]?.name || "Guest"}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {isToday && (
+                            <Badge className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
+                              Today
+                            </Badge>
+                          )}
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-8 w-8 text-destructive hover:text-destructive"
+                            onClick={() => handleCancel(item.id)}
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4" />
-                        <span>
-                          {format(startTime, "h:mm a")} - {format(endTime, "h:mm a")}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Users className="h-4 w-4" />
-                        <span>You and {item.participants[0]?.name || "Guest"}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {isToday && (
-                        <Badge fontVariant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
-                          Today
-                        </Badge>
+
+                      {item.conferencing?.details?.url && (
+                        <div className="mt-4">
+                          <Button
+                            variant="outline"
+                            className="w-full justify-start gap-2"
+                            onClick={() => window.open(item.conferencing?.details?.url, '_blank')}
+                          >
+                            <Video className="h-4 w-4" />
+                            Join Meeting
+                          </Button>
+                        </div>
                       )}
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
-                        onClick={() => handleCancel(item.id)}
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
                     </div>
-                  </div>
-
-                  {item.conferencing?.details?.url && (
-                    <div className="mt-4">
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start gap-2"
-                        onClick={() => window.open(item.conferencing?.details?.url, '_blank')}
-                      >
-                        <Video className="h-4 w-4" />
-                        Join Meeting
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </Card>
-            );
-          })}
+                  </Card>
+                );
+              })}
+            </div>
+          )}
         </div>
-      )}
+
+        {cancelledMeetings.length > 0 && (
+          <div>
+            <h2 className="text-xl font-semibold mb-4">Cancelled Meetings</h2>
+            <div className="grid gap-6">
+              {cancelledMeetings.map((item) => {
+                if (!item.when?.startTime || !item.when?.endTime) {
+                  return null;
+                }
+
+                const startTime = fromUnixTime(item.when.startTime);
+                const endTime = fromUnixTime(item.when.endTime);
+
+                return (
+                  <Card key={item.id} className="overflow-hidden bg-muted/50">
+                    <div className="p-6">
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <h3 className="text-lg font-semibold text-muted-foreground">{item.title}</h3>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4" />
+                            <span>{format(startTime, "EEEE, MMMM d, yyyy")}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Clock className="h-4 w-4" />
+                            <span>
+                              {format(startTime, "h:mm a")} - {format(endTime, "h:mm a")}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Users className="h-4 w-4" />
+                            <span>You and {item.participants[0]?.name || "Guest"}</span>
+                          </div>
+                        </div>
+                        <Badge className="bg-destructive text-destructive-foreground">Cancelled</Badge>
+                      </div>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

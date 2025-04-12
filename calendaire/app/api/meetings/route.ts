@@ -29,7 +29,7 @@ export async function GET() {
       queryParams: {
         calendarId: userData.grantEmail as string,
         limit: 100,
-        showCancelled: false,
+        showCancelled: true,
       },
     });
 
