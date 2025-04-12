@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     const endDateTime = new Date(startDateTime.getTime() + meetingLength * 60000);
 
     // Create event with Nylas
-    await nylas.events.create({
+    const nylasEvent = await nylas.events.create({
       identifier: userData.grantId,
       requestBody: {
         title: eventTypeData.title,
@@ -108,7 +108,8 @@ export async function POST(req: NextRequest) {
         duration: meetingLength,
         attendeeName: name,
         attendeeEmail: email,
-        status: "SCHEDULED"
+        status: "SCHEDULED",
+        nylasEventId: nylasEvent.data.id
       }
     });
 

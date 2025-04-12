@@ -608,7 +608,7 @@ export async function cancelMeetingAction(formData: FormData) {
       // First find the meeting that matches this Nylas event
       const meeting = await prisma.meeting.findFirst({
         where: {
-          id: eventId,
+          nylasEventId: eventId,
           status: "SCHEDULED"
         }
       });

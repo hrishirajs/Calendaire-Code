@@ -140,6 +140,7 @@ model Meeting {
   attendeeName String
   attendeeEmail String
   status String @default("SCHEDULED")
+  nylasEventId String?
   
   eventType EventType @relation(fields: [eventTypeId], references: [id])
   

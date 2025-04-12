@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { format, fromUnixTime } from "date-fns";
-import { Calendar, Clock, Video, Users, X } from "lucide-react";
+import { Calendar, Clock, Video, Users, X, Badge } from "lucide-react";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -163,7 +163,7 @@ export default function MeetingsPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       {isToday && (
-                        <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
+                        <Badge fontVariant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
                           Today
                         </Badge>
                       )}
