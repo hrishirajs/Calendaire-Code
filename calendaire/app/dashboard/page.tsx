@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { auth } from "../lib/auth";
 import { requireUser } from "../lib/hooks";
-import prisma from "../lib/db";
+import prisma from "../../lib/prisma";
 import { EmptyState } from "../components/EmptyState";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import {
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { CopyLinkMenuItem } from "../components/CopyLinkMenu";
 
 
 async function getData(userId: string) {
@@ -94,13 +95,12 @@ return(
 												<span>Preview</span>
 											</Link>
 										</DropdownMenuItem>
-										<DropdownMenuItem>
-											<Link2Icon className="mr-2 size-4"/>
-											<span>Copy</span>
-										</DropdownMenuItem>
-										<DropdownMenuItem>
-											<Pen className="mr-2 size-4"/>
-											<span>Edit</span>
+										<CopyLinkMenuItem meetingUrl={`${process.env.NEXT_PUBLIC_URL}/${data.userName}/${item.url}`}/>
+										<DropdownMenuItem asChild>
+											<Link href={`/dashboard/event/${item.id}`}>
+											 <Pen className="mr-2 size-4"/>Edit
+											</Link>
+										
 										</DropdownMenuItem>
 									</DropdownMenuGroup>
 									<DropdownMenuSeparator/>
