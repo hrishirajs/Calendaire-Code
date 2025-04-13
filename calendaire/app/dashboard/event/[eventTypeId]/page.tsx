@@ -1,4 +1,4 @@
-import { EditEventForm } from "@/app/components/EditEventTypeForm";
+import { EditEventTypeForm } from "@/app/components/EditEventTypeForm";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
@@ -32,7 +32,7 @@ export default async function EditRoute({
 	const data = await getData(params.eventTypeId);
 	
 	return (
-		<EditEventForm
+		<EditEventTypeForm
 			id={data.id}
 			title={data.title}
 			description={data.description}

@@ -52,16 +52,14 @@ async function getData(username: string, eventName: string) {
   return eventType;
 }
 
-// @ts-ignore - Next.js page props type issue
-const BookingPage = async ({
-  params,
-  searchParams,
-}: {
-  params: { username: string; eventURL: string };
+type PageProps = {
+  params: Promise<{ username: string; eventURL: string }>;
   searchParams: { date?: string; time?: string };
-}) => {
+};
+
+const BookingPage = async ({ params, searchParams }: PageProps) => {
   const { username, eventURL } = await params;
-  const { date, time } = await searchParams;
+  const { date, time } = searchParams;
   
   const selectedDate = date
     ? new Date(date)
