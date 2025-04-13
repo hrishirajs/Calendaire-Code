@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { CopyLinkMenuItem } from "../components/CopyLinkMenu";
+import { MenuActiveSwitch } from "../components/EventTypeSwitcher";
 
 
 async function getData(userId: string) {
@@ -127,7 +128,10 @@ return(
 							</div>
 						</Link>
 						<div className="bg-muted px-5 py-3 flex items-center justify-between">
-							<Switch defaultChecked={item.active}/>
+							<MenuActiveSwitch 
+								initialChecked={item.active} 
+								eventTypeId={item.id}
+							/>
 							<Button asChild>
 								<Link href={`/dashboard/event/${item.id}`}>
 									Edit Event

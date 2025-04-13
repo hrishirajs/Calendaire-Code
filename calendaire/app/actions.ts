@@ -7,6 +7,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { eventTypeSchema, onboardingSchema, onboardingSchemaValidation, settingsSchema } from "./lib/zodSchemas";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { stat } from "fs";
 
 
 export async function OnboardingAction(prevState: any, formData:FormData){
@@ -669,3 +670,36 @@ export async function EditEventTypeAction(prevState:any,formData:FormData){
 
 
 
+
+
+
+
+export async function UpdateEventTypeStatusAction(prevState:any ,	{eventTypeId, isChecked}:{eventTypeId:string, isChecked:boolean}) {
+	const session=await requireUser();
+	
+	try{
+		const data=await prisma.eventType.update({
+			where:{
+				id:eventTypeId,
+				userId:session.user?.id,
+			},
+			data:{
+				active:isChecked
+			},
+		});
+
+		revalidatePath("/dashboard");
+		return{
+			status:"success",
+			message:"Event type status updated",
+		};
+	}
+	catch(error){
+		
+		return{
+			status:"error",
+			message:"Failed to update event type status",
+		};
+
+	}
+}
