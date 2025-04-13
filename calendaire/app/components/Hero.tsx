@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -16,12 +17,12 @@ export default function HeroSection() {
             A fully customizable scheduling experience for individuals and businesses. Take control of your time with our intelligent scheduling platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a
+            <Link
               href="/api/auth"
               className="bg-white text-gray-900 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-300"
             >
               Get Started
-            </a>
+            </Link>
             <a
               href="#features"
               className="border border-white/20 text-white font-semibold py-3 px-8 rounded-lg hover:bg-white/10 transition duration-300"

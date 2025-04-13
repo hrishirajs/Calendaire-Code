@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Image from "next/image";
 
 export default function FeaturesSection() {
   return (
@@ -35,7 +36,13 @@ export default function FeaturesSection() {
               <div className="absolute -top-4 -left-4 w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-2xl font-bold text-white/60">
                 {feature.number}
               </div>
-              <img src={feature.icon} alt={feature.title} className="w-12 h-12 mb-6" />
+              <Image 
+                src={feature.icon} 
+                alt={feature.title} 
+                width={48} 
+                height={48} 
+                className="mb-6" 
+              />
               <h3 className="text-xl font-bold mb-4 text-white">{feature.title}</h3>
               <p className="text-gray-300">{feature.description}</p>
             </div>
@@ -53,7 +60,13 @@ export default function FeaturesSection() {
               { name: "Slack", logo: "/icons/slack.svg" },
             ].map((app, index) => (
               <div key={index} className="p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300">
-                <img src={app.logo} alt={app.name} className="w-12 h-12 mx-auto mb-2" />
+                <Image 
+                  src={app.logo} 
+                  alt={app.name} 
+                  width={48} 
+                  height={48} 
+                  className="mx-auto mb-2" 
+                />
                 <p className="text-sm text-gray-300">{app.name}</p>
               </div>
             ))}

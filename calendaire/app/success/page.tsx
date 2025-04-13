@@ -31,7 +31,7 @@ export default function SuccessPage() {
               <Mail className="size-5 text-primary mr-3" />
               <div>
                 <p className="text-sm font-medium">Check Your Email</p>
-                <p className="text-xs text-muted-foreground">We've sent you an email with all the details</p>
+                <p className="text-xs text-muted-foreground">We&apos;ve sent you an email with all the details</p>
               </div>
             </div>
             

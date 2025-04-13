@@ -37,7 +37,7 @@ export default function PrivacyPolicy() {
         {/* Introduction */}
         <h2 className="text-xl font-semibold mt-8 text-primary">Introduction</h2>
         <p className="mt-2 text-zinc-900 leading-relaxed">
-          This Privacy Policy explains how Calendaire ("we," "us," or "our") collects,
+          This Privacy Policy explains how Calendaire (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects,
           uses, and shares your personal information when you visit or use our website.
           We are committed to protecting your privacy and ensuring that your personal
           data is handled securely and responsibly.

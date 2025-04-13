@@ -37,7 +37,7 @@ export default function CookiesPolicy() {
         {/* Introduction */}
         <h2 className="text-xl font-semibold mt-8 text-primary">Introduction</h2>
         <p className="mt-2 text-zinc-900 leading-relaxed">
-          This Cookie Policy explains how Calendaire ("we," "us," or "our") uses cookies and similar tracking technologies on our website. By using our website, you agree to the use of cookies as described in this policy.
+          This Cookie Policy explains how Calendaire (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies and similar tracking technologies on our website. By using our website, you agree to the use of cookies as described in this policy.
         </p>
 
         {/* What Are Cookies? */}
@@ -78,7 +78,7 @@ export default function CookiesPolicy() {
         {/* Managing Your Cookie Preferences */}
         <h2 className="text-xl font-semibold mt-8 text-primary">Managing Your Cookie Preferences</h2>
         <p className="mt-2 text-zinc-900 leading-relaxed">
-          You can manage or disable cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website. For more information on managing cookies, refer to your browser's help documentation:
+          You can manage or disable cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of our website. For more information on managing cookies, refer to your browser&apos;s help documentation:
         </p>
         <ul className="list-disc ml-6 mt-2 text-zinc-900 leading-relaxed">
           <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-zinc-1000 hover:underline">Google Chrome</a></li>

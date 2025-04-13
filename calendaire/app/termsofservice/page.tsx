@@ -37,7 +37,7 @@ export default function TermsOfService() {
         {/* Introduction */}
         <h2 className="text-xl font-semibold mt-8 text-primary">Introduction</h2>
         <p className="mt-2 text-zinc-900 leading-relaxed">
-          These Terms of Service ("Terms") govern your use of the Calendaire website and services ("Service"). By accessing or using our Service, you agree to comply with these Terms. If you do not agree, you may not use our Service.
+          These Terms of Service (&quot;Terms&quot;) govern your use of the Calendaire website and services (&quot;Service&quot;). By accessing or using our Service, you agree to comply with these Terms. If you do not agree, you may not use our Service.
         </p>
 
         {/* User Guidelines */}
@@ -70,7 +70,7 @@ export default function TermsOfService() {
         {/* Warranty Disclaimer */}
         <h2 className="text-xl font-semibold mt-8 text-primary">Warranty Disclaimer</h2>
         <p className="mt-2 text-zinc-900 leading-relaxed">
-          The Service is provided "AS IS" and "AS AVAILABLE" without warranties of any kind. We do not guarantee that the Service will be uninterrupted or error-free.
+          The Service is provided &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; without warranties of any kind. We do not guarantee that the Service will be uninterrupted or error-free.
         </p>
 
         {/* Governing Law */}

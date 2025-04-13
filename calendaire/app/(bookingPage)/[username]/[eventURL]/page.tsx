@@ -229,7 +229,7 @@ const BookingPage = async ({
                 <div className="bg-amber-50 dark:bg-amber-950/20 p-3 rounded-lg border border-amber-100 dark:border-amber-900/50">
                   <p className="text-xs text-amber-800 dark:text-amber-300 flex items-center">
                     <AlertCircle className="size-3.5 mr-1.5 text-amber-600 dark:text-amber-400" />
-                    Today's time slots will only show times in the future (with a 30-minute buffer)
+                    Today&apos;s time slots will only show times in the future (with a 30-minute buffer)
                   </p>
                 </div>
               )}
@@ -271,7 +271,7 @@ const BookingPage = async ({
           <div className="px-6 pb-4 text-xs text-muted-foreground">
             <p className="flex items-center justify-center md:justify-start">
               <CalendarCheck className="size-3.5 mr-1.5 text-blue-500" />
-              Time slots are based on the host's configured availability
+              Time slots are based on the host&apos;s configured availability
             </p>
           </div>
         </Card>

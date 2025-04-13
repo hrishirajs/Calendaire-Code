@@ -1,13 +1,14 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 
 export default function TestimonialsSection() {
   return (
     <section className="relative bg-gradient-to-r from-gray-900 via-black to-gray-800 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-white mb-4">Don't take our word for it</h2>
-          <p className="text-xl text-gray-300">Our users are our best ambassadors. Discover why we're the top choice for scheduling meetings.</p>
+          <h2 className="text-4xl font-extrabold text-white mb-4">Don&apos;t take our word for it</h2>
+          <p className="text-xl text-gray-300">Our users are our best ambassadors. Discover why we&apos;re the top choice for scheduling meetings.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -39,7 +40,7 @@ export default function TestimonialsSection() {
                   <p className="text-sm text-gray-400">{testimonial.role}</p>
                 </div>
               </div>
-              <blockquote className="text-gray-300 italic">"{testimonial.quote}"</blockquote>
+              <blockquote className="text-gray-300 italic">&ldquo;{testimonial.quote}&rdquo;</blockquote>
             </div>
           ))}
         </div>
@@ -59,9 +60,11 @@ export default function TestimonialsSection() {
                   { name: "Nylas", logo: "/nylas logo.png" },
                 ].map((tech, index) => (
                   <div key={index} className="flex-shrink-0 w-32">
-                    <img 
+                    <Image 
                       src={tech.logo} 
                       alt={tech.name} 
+                      width={128}
+                      height={80}
                       className="h-20 w-full object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
                     />
                   </div>
@@ -77,9 +80,11 @@ export default function TestimonialsSection() {
                   { name: "Nylas", logo: "/nylas logo.png" },
                 ].map((tech, index) => (
                   <div key={`duplicate-${index}`} className="flex-shrink-0 w-32">
-                    <img 
+                    <Image 
                       src={tech.logo} 
                       alt={tech.name} 
+                      width={128}
+                      height={80}
                       className="h-20 w-full object-contain opacity-50 hover:opacity-100 transition-opacity duration-300"
                     />
                   </div>

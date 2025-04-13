@@ -77,7 +77,7 @@ export function BookingForm({ eventTypeId, userName, time, date, duration }: Boo
             <CalendarCheck className="size-4 mr-2 text-primary" />
             Just a few details to finish
           </h3>
-          <p className="text-xs text-muted-foreground">We'll send the meeting details to your email.</p>
+          <p className="text-xs text-muted-foreground">We&apos;ll send the meeting details to your email.</p>
         </div>
         
         <div className="flex flex-col gap-y-2 mt-4">
